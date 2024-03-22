@@ -24,7 +24,7 @@ func Default() *Logger {
 	return l
 }
 
-func SetLogger(l *Logger) {
+func Set(l *Logger) {
 	logger.Store(l)
 }
 
