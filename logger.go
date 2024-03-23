@@ -91,3 +91,13 @@ func (l *Logger) WithContext(ctx context.Context) *Logger {
 func WithContext(ctx context.Context) *Logger {
 	return Default().WithContext(ctx)
 }
+
+func (l *Logger) WithOption(opts ...zap.Option) *Logger {
+	clone := *l
+	clone.logger = clone.logger.WithOptions(opts...)
+	return &clone
+}
+
+func WithOption(opts ...zap.Option) *Logger {
+	return Default().WithOption(opts...)
+}

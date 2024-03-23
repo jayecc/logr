@@ -38,33 +38,33 @@ func (l *Logger) Errorf(format string, args ...interface{}) {
 }
 
 func Debug(msg string, fields ...zap.Field) {
-	Default().Debug(msg, fields...)
+	Default().WithOption(zap.AddCallerSkip(1)).Debug(msg, fields...)
 }
 
 func Debugf(format string, args ...interface{}) {
-	Default().Debugf(format, args...)
+	Default().WithOption(zap.AddCallerSkip(1)).Debugf(format, args...)
 }
 
 func Info(msg string, fields ...zap.Field) {
-	Default().Info(msg, fields...)
+	Default().WithOption(zap.AddCallerSkip(1)).Info(msg, fields...)
 }
 
 func Infof(format string, args ...interface{}) {
-	Default().Infof(format, args...)
+	Default().WithOption(zap.AddCallerSkip(1)).Infof(format, args...)
 }
 
 func Warn(msg string, fields ...zap.Field) {
-	Default().Warn(msg, fields...)
+	Default().WithOption(zap.AddCallerSkip(1)).Warn(msg, fields...)
 }
 
 func Warnf(format string, args ...interface{}) {
-	Default().Warnf(format, args...)
+	Default().WithOption(zap.AddCallerSkip(1)).Warnf(format, args...)
 }
 
 func Error(msg string, fields ...zap.Field) {
-	Default().Error(msg, fields...)
+	Default().WithOption(zap.AddCallerSkip(1)).Error(msg, fields...)
 }
 
 func Errorf(format string, args ...interface{}) {
-	Default().Errorf(format, args...)
+	Default().WithOption(zap.AddCallerSkip(1)).Errorf(format, args...)
 }
