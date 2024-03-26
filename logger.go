@@ -77,15 +77,7 @@ func With(fields ...zap.Field) *Logger {
 }
 
 func (l *Logger) WithContext(ctx context.Context) *Logger {
-	spanCtx := trace.SpanContextFromContext(ctx)
-	var fields []zap.Field
-	if spanCtx.HasTraceID() {
-		fields = append(fields, zap.String("trace", spanCtx.TraceID().String()))
-	}
-	if spanCtx.HasSpanID() {
-		fields = append(fields, zap.String("span", spanCtx.SpanID().String()))
-	}
-	return l.With(fields...)
+	return l.With(FieldFromContext(ctx)...)
 }
 
 func WithContext(ctx context.Context) *Logger {
@@ -100,4 +92,16 @@ func (l *Logger) WithOption(opts ...zap.Option) *Logger {
 
 func WithOption(opts ...zap.Option) *Logger {
 	return Default().WithOption(opts...)
+}
+
+func FieldFromContext(ctx context.Context) []zap.Field {
+	spanCtx := trace.SpanContextFromContext(ctx)
+	var fields []zap.Field
+	if spanCtx.HasTraceID() {
+		fields = append(fields, zap.String("trace", spanCtx.TraceID().String()))
+	}
+	if spanCtx.HasSpanID() {
+		fields = append(fields, zap.String("span", spanCtx.SpanID().String()))
+	}
+	return fields
 }
