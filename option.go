@@ -60,6 +60,6 @@ func (fl *fileLogger) Sync() error {
 	return fl.Logger.Close()
 }
 
-var FileOutput = func(l *lumberjack.Logger) zapcore.WriteSyncer {
+var FileWriter = func(l *lumberjack.Logger) zapcore.WriteSyncer {
 	return zapcore.Lock(&fileLogger{l})
 }
