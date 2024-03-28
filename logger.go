@@ -67,6 +67,9 @@ func Sync() {
 }
 
 func (l *Logger) With(fields ...zap.Field) *Logger {
+	if len(fields) == 0 {
+		return l
+	}
 	clone := *l
 	clone.logger = clone.logger.With(fields...)
 	return &clone
@@ -85,6 +88,9 @@ func WithContext(ctx context.Context) *Logger {
 }
 
 func (l *Logger) WithOption(opts ...zap.Option) *Logger {
+	if len(opts) == 0 {
+		return l
+	}
 	clone := *l
 	clone.logger = clone.logger.WithOptions(opts...)
 	return &clone
