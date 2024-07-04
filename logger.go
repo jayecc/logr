@@ -104,10 +104,10 @@ func FieldFromContext(ctx context.Context) []zap.Field {
 	spanCtx := trace.SpanContextFromContext(ctx)
 	var fields []zap.Field
 	if spanCtx.HasTraceID() {
-		fields = append(fields, zap.String("trace", spanCtx.TraceID.String()))
+		fields = append(fields, zap.String("trace", spanCtx.TraceID().String()))
 	}
 	if spanCtx.HasSpanID() {
-		fields = append(fields, zap.String("span", spanCtx.SpanID.String()))
+		fields = append(fields, zap.String("span", spanCtx.SpanID().String()))
 	}
 	return fields
 }
