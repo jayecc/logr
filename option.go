@@ -3,7 +3,6 @@ package logr
 import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
-	"gopkg.in/natefinch/lumberjack.v2"
 	"strings"
 )
 
@@ -50,16 +49,4 @@ func SetWriter(ws zapcore.WriteSyncer) Option {
 	return func(c *config) {
 		c.WriteSyncer = ws
 	}
-}
-
-type fileLogger struct {
-	*lumberjack.Logger
-}
-
-func (fl *fileLogger) Sync() error {
-	return fl.Logger.Close()
-}
-
-var FileWriter = func(l *lumberjack.Logger) zapcore.WriteSyncer {
-	return zapcore.Lock(&fileLogger{l})
 }
