@@ -2,6 +2,7 @@ package logr
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
 	"go.uber.org/zap"
@@ -24,6 +25,8 @@ func TestLogger(t *testing.T) {
 	slog.Infoc(ctx, "debug", zap.String("times", time.Now().String()))
 	Error("error", zap.Error(fmt.Errorf("test error")))
 	logs.Infoc(ctx, "debug", zap.String("times", time.Now().String()))
+	Infow("infow", "key", "value")
+	Errorcw(ctx, "infow", "key", "value", "error", errors.New("error content"))
 }
 
 func initLogger(appName string) (*Logger, func(), error) {
